@@ -40,3 +40,9 @@ export const TextCard = styled.span`
     color: #8c8c8c;
     font-size: 14px;
 `;
+
+export const Banner = styled.img`
+  width: 100%;
+  height: 210px;
+  border-radius: 12px;
+`;

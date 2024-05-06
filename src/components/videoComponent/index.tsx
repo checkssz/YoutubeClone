@@ -1,21 +1,30 @@
-import { ChannelImage, Container, ImageBanner, TextCard, TextContainer, Title, TitleContainer } from "./style";
+import { Banner, ChannelImage, Container, ImageBanner, TextCard, TextContainer, Title, TitleContainer } from "./style";
 
-function VideoComponent() {
-    return ( 
-        <Container>
-        <ImageBanner src="https://i.ytimg.com/vi/q0M5FQbgiQY/maxresdefault.jpg"/>
+interface Props {
+    title: string
+    thumbnail: string
+    channelImage: string
+    channelName: string
+    details: string
+  }
+  
+  function VideoCard(props : Props) {
+  
+    return (
+      <Container>
+        <Banner alt="thumbnail" src={props.thumbnail}/>
         <TitleContainer>
-        <ChannelImage>
-            LD
-        </ChannelImage>
-        <TextContainer>
-            <Title>LOUD Valorant: Campeã Mundial da Champions 2022</Title>
-            <TextCard>LOUD</TextCard>
-            <TextCard>247 mil visualizações - há 1 ano</TextCard>
-        </TextContainer>
+          <ChannelImage>
+            {props.channelImage}
+          </ChannelImage>
+          <TextContainer>
+            <Title>{props.title}</Title>
+            <TextCard>{props.channelName}</TextCard>
+            <TextCard>{props.details}</TextCard>
+          </TextContainer>
         </TitleContainer>
-        </Container>
-     )
-}
-
-export default VideoComponent;
+      </Container>
+    )
+  }
+  
+  export default VideoCard;
