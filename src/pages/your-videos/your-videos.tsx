@@ -145,7 +145,7 @@ function YourVideos() {
       <Menu />
       <Container openMenu={openMenu}>
         <UserContainer>
-          <UserName>{user && user.email ? user.email : ''}</UserName>
+          <UserName>{user && user.name ? user.name : ''}</UserName>
           <AddVideoButton onClick={() => setHideModal(false)}>cadastrar video</AddVideoButton>
           <Modal hideModal={hideModal}>
             <ModalContent>

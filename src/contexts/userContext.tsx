@@ -14,7 +14,7 @@ export const UserStorage = ({ children }: any) => {
 
   const getVideos = async (token: string, user_id: string) => {
     try {
-      const response = await api.get(`/videos/get-videos/${user_id}`, { headers: { authorization: token } });
+      const response = await api.get(`/videos/get-videos?user_id=${user_id}`, { headers: { authorization: token } });
       if (response.status === 200) {
         console.log("resposta")
         setUserVideos(response.data.videos);
@@ -27,7 +27,7 @@ export const UserStorage = ({ children }: any) => {
 
   const createVideos = async (token: string, user_id: string, title: string, description: string, thumbnail: string, publishedAt: Date) => {
     try {
-      const response = await api.post(`/videos/create-video/${user_id}`, { title, description, thumbnail, publishedAt },
+      const response = await api.post(`/videos/create-video`, { user_id, title, description, thumbnail, publishedAt },
         { headers: { authorization: token } });
       if (response.status === 200) {
         alert('Video enviado com sucesso!');
@@ -40,18 +40,16 @@ export const UserStorage = ({ children }: any) => {
 
   const getUser = async (token: string) => {
     try {
-        const response = await api.get('user/get-user', { headers: { authorization: token } });
-        if (response.status === 200) {
-            console.log("Dados do usuário:", response.data.user);
-            setUser(response.data.user);
-            setLogin(true);
-            getVideos(token, response.data.user.id);
-        }
+      const response = await api.get('user/get-user', { headers: { authorization: token } });
+      if (response.status === 201) {
+        setUser(response.data.user);
+        setLogin(true);
+        getVideos(token, response.data.user.id);
+      }
     } catch (error) {
-        console.log('usuário não autenticado', error)
+      console.log('usuário não autenticado', error)
     }
-};
-
+  };
 
   useEffect(() => {
     getUser(token)
